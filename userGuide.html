@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Asset Status User Guide</title>
+    <style>
+      :root {
+        --bg: #fff;
+        --ink: #1f2933;
+        --muted: #5f6b7a;
+        --line: #d5dae1;
+        --head: #f3f5f8;
+        --link: #0b5cad;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #14181d;
+          --ink: #e6e9ed;
+          --muted: #9aa5b1;
+          --line: #333b45;
+          --head: #1d232a;
+          --link: #7db7f5;
+        }
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font:
+          15px/1.6 system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          sans-serif;
+      }
+      main {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 24px 16px 64px;
+      }
+      h1 {
+        font-size: 28px;
+        margin: 0 0 8px;
+      }
+      h2 {
+        font-size: 21px;
+        margin: 36px 0 8px;
+        padding-top: 12px;
+        border-top: 1px solid var(--line);
+      }
+      h3 {
+        font-size: 16px;
+        margin: 22px 0 4px;
+      }
+      a {
+        color: var(--link);
+      }
+      nav ol {
+        padding-left: 20px;
+        margin: 8px 0 0;
+      }
+      .sub {
+        color: var(--muted);
+        margin: 0;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 12px 0;
+        font-size: 14px;
+      }
+      th,
+      td {
+        border: 1px solid var(--line);
+        padding: 6px 10px;
+        text-align: left;
+        vertical-align: top;
+      }
+      th {
+        background: var(--head);
+      }
+      @media (max-width: 600px) {
+        table {
+          display: block;
+          overflow-x: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Asset Status User Guide</h1>
+      <p class="sub">Advantage One &middot; MyGeotab add-in</p>
+      <nav aria-label="Contents"><ol></ol></nav>
+      <h2 id="overview">Overview</h2>
+      <p>
+        Asset Status is a MyGeotab page that shows every asset in your database on one screen, with
+        its driver, last report, speed and address, and warns you when a device, camera or driver
+        needs attention.
+      </p>
+      <p>Use it to answer three questions quickly:</p>
+      <ul>
+        <li>Which assets have stopped reporting, or are reporting bad data?</li>
+        <li>Which assets have a device problem (no GPS, no engine data, failure, removal)?</li>
+        <li>
+          Which drivers have a duty status that does not match what the vehicle is doing, or an HOS
+          violation?
+        </li>
+      </ul>
+      <p>
+        Everything on the page reads live from your own MyGeotab database with your own sign-in, so
+        you only see the assets and drivers your account is allowed to see. The page never changes
+        any data; it only reads it and links to MyGeotab reports.
+      </p>
+      <h2 id="the-page-at-a-glance">The page at a glance</h2>
+      <p>The page has four parts, from top to bottom:</p>
+      <ol>
+        <li>
+          <strong>Header and title.</strong> The Advantage One and Geotab logos sit in the header.
+          Under the Geotab logo, at the right of the page title, are the User Guide and Refresh
+          icons.
+        </li>
+        <li>
+          <strong>Summary boxes.</strong> A row of small boxes with counts for your assets, issues
+          and alerts.
+        </li>
+        <li>
+          <strong>Toolbar.</strong> Search, group, tracking and last-update filters, the refresh
+          interval, and the Columns button.
+        </li>
+        <li><strong>Asset table.</strong> One row per asset. You choose which columns to show.</li>
+      </ol>
+      <h2 id="summary-boxes">Summary boxes</h2>
+      <p>
+        The boxes at the top count every active asset in your database. They do not change when you
+        search or filter the table. Archived assets and assets on a Terminated or Suspended plan are
+        left out.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Box</th>
+            <th>What it shows</th>
+            <th>When it appears</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Assets / Tracked / Untracked</td>
+            <td>
+              Total assets, assets with a telematics device (Tracked), and trailers or equipment
+              without one (Untracked)
+            </td>
+            <td>Always</td>
+          </tr>
+          <tr>
+            <td>Minimums</td>
+            <td>
+              One line per minimum you set, such as "Fuel Level below 20%", with the number of
+              assets under it
+            </td>
+            <td>Only after you set at least one minimum (see Choosing and arranging columns)</td>
+          </tr>
+          <tr>
+            <td>Total Potential Issues</td>
+            <td>The total number of issues, then a count for each of the four issue types</td>
+            <td>Always</td>
+          </tr>
+          <tr>
+            <td>HOS Alerts / Violations</td>
+            <td>
+              Assets whose Duty Status is flagged amber, and assets whose driver has a current
+              violation
+            </td>
+            <td>Only while the Duty Status or Violation column is ticked</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Counts show a dash (—) while data is still loading, or when it could not be read. All boxes
+        keep the same height, and a box is as wide as its longest line.
+      </p>
+      <p>
+        An asset with two issues is counted once in each issue's line but twice in the Total
+        Potential Issues number, so the total can be larger than the number of assets affected.
+      </p>
+      <h2 id="finding-assets">Finding assets</h2>
+      <p>
+        The table opens showing only assets that reported <strong>today</strong>. If an asset you
+        expect is missing, change Last update first.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Control</th>
+            <th>What it does</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Search</td>
+            <td>
+              Matches part of an asset name, driver name or address. Results narrow as you type.
+            </td>
+          </tr>
+          <tr>
+            <td>Group</td>
+            <td>
+              Limits the page to one MyGeotab group. "All groups" shows everything you can see.
+            </td>
+          </tr>
+          <tr>
+            <td>Show assets</td>
+            <td>
+              All assets, Tracked only (has a telematics device), or Untracked only (trailers,
+              equipment).
+            </td>
+          </tr>
+          <tr>
+            <td>Last update</td>
+            <td>
+              Today, Yesterday, 3 to 5 days, 5 days or more, Never reported, or All. Use "5 days or
+              more" and "Never reported" to find assets that have gone quiet.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        The filters combine: for example, Group "Vancouver" plus Tracked plus "5 days or more" lists
+        only tracked Vancouver assets that have not reported for five days or more.
+      </p>
+      <p>
+        Click a column header to sort by it; click again to reverse. Assets with no value in that
+        column always sort last. The table shows 50 assets per page; use the page controls under it
+        to move on. The asset name column is always first and stays in place when you scroll
+        sideways.
+      </p>
+      <p>
+        Your Last update choice is remembered in this browser. The other filters reset when you
+        reload the page.
+      </p>
+      <h2 id="choosing-and-arranging-columns">Choosing and arranging columns</h2>
+      <p>
+        Click <strong>Columns</strong> at the right of the toolbar to open the Columns panel. Tick a
+        column to add it to the table and untick it to remove it. Each tick is saved straight away,
+        and the choice applies to <strong>everyone who uses this database</strong>, not only to you.
+        Press Escape or the x button to close the panel.
+      </p>
+      <p>
+        The table starts with Driver, Last Update, Speed and Address. A newly ticked column is added
+        at the end. To move a column, drag its header to a new place. To change its width, drag the
+        edge of its header.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Group</th>
+            <th>Columns</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Asset Information</td>
+            <td>
+              Driver, Last Update, Speed, Address, Serial Number, VIN, License Plate, Make And
+              Model, Work Requests
+            </td>
+          </tr>
+          <tr>
+            <td>Device Health</td>
+            <td>Potential Issues</td>
+          </tr>
+          <tr>
+            <td>Engine Data</td>
+            <td>
+              Odometer, Engine Hours, Fuel Level, Driver Seatbelt, Coolant Temperature, Battery
+              Voltage, State Of Charge
+            </td>
+          </tr>
+          <tr>
+            <td>Aux Inputs</td>
+            <td>Aux 1 to Aux 4</td>
+          </tr>
+          <tr>
+            <td>Dashcam</td>
+            <td>Camera Health, Live Stream</td>
+          </tr>
+          <tr>
+            <td>ELD</td>
+            <td>Duty Status, Violation</td>
+          </tr>
+          <tr>
+            <td>Winter Operations</td>
+            <td>
+              Solid, Liquid and Prewet Material Rate, Air Temperature, Road Temperature, Third-Party
+              Aux inputs
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 id="set-a-minimum">Set a minimum</h3>
+      <p>
+        Fuel Level, Battery Voltage and State Of Charge have a <strong>Set min</strong> button in
+        the panel. Enter a number (for example 20 for 20 %) and save. From then on, any asset whose
+        reading is below it has that cell tinted light yellow, and a line for it appears in the
+        Minimums summary box. Clear the number to remove the minimum.
+      </p>
+      <h3 id="name-an-aux-input">Name an Aux input</h3>
+      <p>
+        Click the pencil beside an Aux column to give the input your own name (for example "Front
+        Door") and your own words for ON and OFF (for example "Open" and "Closed").
+      </p>
+      <h2 id="potential-issues">Potential Issues</h2>
+      <p>
+        Tick <strong>Potential Issues</strong> (group Device Health) to see which assets may have a
+        device problem. A flagged cell is tinted light red and shows the issue names with a
+        <strong>Click here for details</strong> link. The page works the issues out from data it
+        already reads, so treat them as estimates to check, not as confirmed failures.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Issue</th>
+            <th>Flagged when</th>
+            <th>Suggested action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>No GPS / Location</td>
+            <td>
+              The device is communicating but has no GPS fix, or its position has not changed in 24
+              hours while the vehicle travelled
+            </td>
+            <td>Remount the device in a clearer location with an unobstructed view of the sky</td>
+          </tr>
+          <tr>
+            <td>No Engine Data</td>
+            <td>
+              The device is communicating and the asset travelled today or yesterday, but none of
+              raw odometer, engine hours, road speed, fuel level or state of charge was reported in
+              the last 7 days
+            </td>
+            <td>Unplug the device for 5 seconds to reset</td>
+          </tr>
+          <tr>
+            <td>Device Failure</td>
+            <td>The device reported a hardware fault in the last 7 days</td>
+            <td>Report to Advantage One Support</td>
+          </tr>
+          <tr>
+            <td>Device Removal</td>
+            <td>
+              The device lost all power three or more times in the last 7 days without a firmware
+              update
+            </td>
+            <td>Inspect the device to ensure it is connected securely</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        All issue rules skip assets that last reported 3 days or more ago, since those are better
+        found with the Last update filter. No Engine Data is also skipped for assets on a Base plan.
+      </p>
+      <h3 id="the-details-window">The details window</h3>
+      <p>
+        Click <strong>Click here for details</strong> to open a window listing each issue on that
+        asset with what was found and the suggested action. Three icons sit beside each issue, from
+        left to right:
+      </p>
+      <ol>
+        <li>
+          <strong>Report.</strong> Opens the matching MyGeotab report for that asset and the last 7
+          days in a new tab: Trips History for No GPS, Measurements for No Engine Data, and Engine
+          Faults for Device Failure and Device Removal.
+        </li>
+        <li>
+          <strong>Email.</strong> Opens a draft email to Advantage One Support
+          (support@advtracking.net) with the asset, issue and findings filled in.
+        </li>
+        <li>
+          <strong>Copy.</strong> Copies the same text so you can paste it into a ticket or message.
+        </li>
+      </ol>
+      <h2 id="eld-duty-status-and-violation">ELD: Duty Status and Violation</h2>
+      <p>
+        Tick <strong>Duty Status</strong> and <strong>Violation</strong> (group ELD) to compare each
+        driver's hours-of-service record with what the vehicle is doing. Both columns follow the
+        driver currently assigned to the asset, so an asset with no driver shows a dash, and
+        untracked assets are blank.
+      </p>
+      <h3 id="duty-status">Duty Status</h3>
+      <p>
+        The cell shows the driver's latest status: Driving, On Duty, Off Duty, Sleeper Berth, Yard
+        Move or Personal Conveyance. It turns <strong>amber</strong> and becomes a link when the
+        status does not fit the speed:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Speed</th>
+            <th>Flagged when the status is</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Over 8 km/h (about 5 mph)</td>
+            <td>Anything other than Driving</td>
+          </tr>
+          <tr>
+            <td>Exactly 0 km/h</td>
+            <td>Driving</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Between 0 and 8 km/h nothing is flagged. Drivers in co-driver (team) mode are never flagged.
+        Click the amber status to open that <strong>driver's</strong> HOS Logs in MyGeotab for the
+        last 7 days, in a new tab.
+      </p>
+      <h3 id="violation">Violation</h3>
+      <p>
+        The cell shows any HOS violation logged for the driver in the last 24 hours, for example
+        "Driving Limit". It is tinted light red and links to the
+        <strong>HOS Violations</strong> page filtered to that driver. A dash means no current
+        violation.
+      </p>
+      <h3 id="hos-alerts-and-violations-counts">HOS Alerts and Violations counts</h3>
+      <p>
+        While either column is ticked, a summary box shows <strong>HOS Alerts</strong> (assets with
+        an amber Duty Status) and <strong>Violations</strong> (assets with a current violation). A
+        flagged status can be a real problem, or simply a driver who has not changed status yet, so
+        check the HOS logs before acting.
+      </p>
+      <h2 id="other-columns-and-links">Other columns and links</h2>
+      <p>
+        Underlined text in the table is a link. Every link opens in a new tab, so the page stays
+        where you left it.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Column</th>
+            <th>What it shows</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Driver</td>
+            <td>
+              The assigned driver's name. "Assign driver" appears when a tracked asset has none.
+            </td>
+            <td>"Assign driver" opens the asset's page in MyGeotab</td>
+          </tr>
+          <tr>
+            <td>Last Update</td>
+            <td>When the asset last reported</td>
+            <td>None</td>
+          </tr>
+          <tr>
+            <td>Speed</td>
+            <td>Latest speed in km/h</td>
+            <td>None</td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>Street address of the latest position</td>
+            <td>Opens the position in Google Maps</td>
+          </tr>
+          <tr>
+            <td>Work Requests</td>
+            <td>Number of pending repairs</td>
+            <td>A number above zero opens the asset's Maintenance tab</td>
+          </tr>
+          <tr>
+            <td>Camera Health</td>
+            <td>
+              Healthy, Unstable, Unhealthy or Not Working for assets with a paired camera. Unstable,
+              Unhealthy and Not Working are tinted light red.
+            </td>
+            <td>None</td>
+          </tr>
+          <tr>
+            <td>Live Stream</td>
+            <td>"Watch live" for assets with a paired camera</td>
+            <td>Opens the MyGeotab Map with the asset selected</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Untracked assets (trailers and equipment) have no device, so their driver, speed and device
+        columns stay blank. Engine Data, Aux and Winter Operations columns show the latest reading
+        the device reported, or a dash when it has none.
+      </p>
+      <h2 id="refreshing-saved-settings-and-troubleshooting">
+        Refreshing, saved settings and troubleshooting
+      </h2>
+      <h3 id="keeping-the-data-current">Keeping the data current</h3>
+      <p>
+        The page reloads its data on its own every few minutes. Change
+        <strong>Refresh every</strong> in the toolbar to any whole number from 1 to 60 minutes, then
+        press Enter. The line "Data updated" under the toolbar shows when the table last loaded. To
+        reload the whole page at once, click the <strong>Refresh icon</strong> at the right of the
+        title; it does the same as F5 in your browser.
+      </p>
+      <h3 id="what-is-saved">What is saved</h3>
+      <p>
+        The columns you tick, their order, the minimums, the Aux names and the refresh interval are
+        saved in your MyGeotab database and shared by everyone who uses the page. Only the Last
+        update filter is stored per browser.
+      </p>
+      <h3 id="troubleshooting">Troubleshooting</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Problem</th>
+            <th>What to check</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>An asset is missing</td>
+            <td>
+              Set Last update to All, Show assets to All assets, and Group to All groups. Archived
+              assets and Terminated or Suspended plans are never listed.
+            </td>
+          </tr>
+          <tr>
+            <td>A column shows a dash</td>
+            <td>
+              The device has not reported that reading, or (for Duty Status and Violation) the asset
+              has no driver assigned.
+            </td>
+          </tr>
+          <tr>
+            <td>Counts show a dash</td>
+            <td>
+              Data is still loading or could not be read; wait for the next refresh or click the
+              Refresh icon.
+            </td>
+          </tr>
+          <tr>
+            <td>No Potential Issues for an asset that looks wrong</td>
+            <td>
+              Issues are skipped for assets that last reported 3 or more days ago, and No Engine
+              Data is skipped on Base plans and parked assets.
+            </td>
+          </tr>
+          <tr>
+            <td>Duty Status is amber but the driver is fine</td>
+            <td>
+              The status may not have been updated yet. Open the HOS Logs link to see the driver's
+              actual log.
+            </td>
+          </tr>
+          <tr>
+            <td>A link opens a MyGeotab report with nothing in it</td>
+            <td>
+              The report covers a limited period (24 hours for Violations, 7 days for the others),
+              so older events are not shown.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        For anything else, or to report a Device Failure, email Advantage One Support at
+        support@advtracking.net.
+      </p>
+    </main>
+  </body>
+</html>
