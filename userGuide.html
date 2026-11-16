@@ -268,10 +268,6 @@
             </td>
           </tr>
           <tr>
-            <td>Device Health</td>
-            <td>Potential Issues</td>
-          </tr>
-          <tr>
             <td>Engine Data</td>
             <td>
               Odometer, Engine Hours, Fuel Level, Driver Seatbelt, Coolant Temperature, Battery
@@ -279,16 +275,16 @@
             </td>
           </tr>
           <tr>
-            <td>Aux Inputs</td>
-            <td>Aux 1 to Aux 4</td>
+            <td>ELD</td>
+            <td>Duty Status, Violation</td>
           </tr>
           <tr>
             <td>Dashcam</td>
             <td>Camera Health, Live Stream</td>
           </tr>
           <tr>
-            <td>ELD</td>
-            <td>Duty Status, Violation</td>
+            <td>Aux Inputs</td>
+            <td>Aux 1 to Aux 4</td>
           </tr>
           <tr>
             <td>Winter Operations</td>
@@ -296,6 +292,10 @@
               Solid, Liquid and Prewet Material Rate, Air Temperature, Road Temperature, Third-Party
               Aux inputs
             </td>
+          </tr>
+          <tr>
+            <td>Device Health</td>
+            <td>Potential Issues</td>
           </tr>
         </tbody>
       </table>
@@ -415,7 +415,7 @@
         </tbody>
       </table>
       <p>
-        Between 0 and 8 km/h nothing is flagged. Drivers in co-driver (team) mode are never flagged.
+        Between 0 and 8 km/h nothing is flagged. The flag waits 5 minutes: the status must have been the same for 5 minutes, and the asset must have been moving (or stopped) for 5 minutes, before the cell turns amber. Drivers in co-driver (team) mode are never flagged.
         Click the amber status to open that <strong>driver's</strong> HOS Logs in MyGeotab for the
         last 7 days, in a new tab.
       </p>
@@ -501,9 +501,9 @@
       <p>
         The page reloads its data on its own every few minutes. Change
         <strong>Refresh every</strong> in the toolbar to any whole number from 1 to 60 minutes, then
-        press Enter. The "Data updated" line under the Refresh icon shows when the table last loaded. To
-        reload the whole page at once, click the <strong>Refresh icon</strong> at the right of the
-        title; it does the same as F5 in your browser.
+        press Enter. The "Data updated" line under the Refresh icon shows when the table last
+        loaded. To reload the whole page at once, click the <strong>Refresh icon</strong> at the
+        right of the title; it does the same as F5 in your browser.
       </p>
       <h3 id="what-is-saved">What is saved</h3>
       <p>
